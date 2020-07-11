@@ -17,21 +17,38 @@ int main()
 
     struct personalData person;
 
-    printf("Read struct's data: \n");
-    printf("Enter name, please: \n");
-    fgets(person.name, 20, stdin);
+    FILE *archivo;
+    archivo = fopen("DatosPersonales001.dat", "wb");
+
+    if(archivo != NULL)
+    {
+        fflush(stdin);
+
+        printf("Read struct's data: \n");
+        printf("Enter name, please: \n");
+        fgets(person.name, 20, stdin);
     
-    printf("Enter last name, please: \n");
-    fgets(person.lastName, 20, stdin);
+        printf("Enter last name, please: \n");
+        fgets(person.lastName, 20, stdin);
     
-    printf("Enter age, please: \n");
-    scanf("%i", &person.age);
+        printf("Enter age, please: \n");
+        scanf("%i", &person.age);
 
 
-    printf("Print data: \n");
-    printf("%s", person.name);
-    printf("%s", person.lastName);
-    printf("%i", person.age);
+        printf("Print data: \n");
+        printf("%s", person.name);
+        printf("%s", person.lastName);
+        printf("%i", person.age);
+
+        fwrite(&person, sizeof(person), 1, archivo);
+
+        fclose(archivo);
+    } else
+    {
+        printf("No se ha podido crear el archivo\n");
+    }
+    
+
 
     return 0;
 
